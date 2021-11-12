@@ -31,3 +31,7 @@ Open Android Studio and create a new project from the just downloaded source.
 ### Steps for run application
 
 Open `gradle.build` in Android Studio and run the app on an emulator or directly on a device.
+
+### Known Issues
+
+There are some crash issues when user load more data, it caused by api return null some fields
