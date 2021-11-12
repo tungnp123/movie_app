@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Movie app</string>
+    <string name="google_map_api">AIzaSyCR04T8NMHtZ9QLAt89cL1PJc5i0cXUm08</string>
+    <string name="permission_location_rationale">In order to get the current location, we require the location permission to be granted.</string>
+</resources>
