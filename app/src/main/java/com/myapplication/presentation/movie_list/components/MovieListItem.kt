@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -17,6 +18,7 @@ import com.myapplication.R
 import com.myapplication.data.remote.dto.configuration.ConfigurationDto
 import com.myapplication.domain.model.Movie
 
+val TEST_TAG_LIST_ITEM = "TEST_TAG_LIST_ITEM"
 @Composable
 fun MovieListItem(
     configurationDto: ConfigurationDto?,
@@ -31,7 +33,8 @@ fun MovieListItem(
                 top = 6.dp
             )
             .fillMaxWidth()
-            .clickable { onItemClick(movie) },
+            .clickable { onItemClick(movie) }
+            .testTag(TEST_TAG_LIST_ITEM),
         elevation = 8.dp
     ) {
         Row(

@@ -11,6 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -22,6 +23,9 @@ import com.myapplication.presentation.Screen
 import com.myapplication.presentation.movie_list.components.AdvertiseItem
 import com.myapplication.presentation.movie_list.components.MovieListItem
 
+val TAG_LIST_MOVIES = "TAG_LIST_MOVIES"
+val TAG_LIST_MOVIES_SCREEN = "TAG_LIST_MOVIES_SCREEN"
+
 @Composable
 fun MovieListScreen(
     movieListType: MovieListType,
@@ -31,7 +35,11 @@ fun MovieListScreen(
     viewModel.path = movieListType.type
     val state = viewModel.movies.value
     val swipeRefreshState = rememberSwipeRefreshState(isRefreshing = false)
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .testTag(TAG_LIST_MOVIES_SCREEN)
+    ) {
         SwipeRefresh(
             state = swipeRefreshState,
             onRefresh = {
@@ -39,7 +47,11 @@ fun MovieListScreen(
                 viewModel.getListMovies()
             },
         ) {
-            LazyColumn(modifier = Modifier.fillMaxSize()) {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .testTag(TAG_LIST_MOVIES)
+            ) {
                 items(Constants.calculateMovieListSize(state.size)) { index ->
                     viewModel.onChangeListPosition(index)
                     if ((index + 1) >= Constants.calculateMovieListSize(viewModel.page.value * viewModel.page_size) && !viewModel.isLoading.value) {
@@ -50,7 +62,7 @@ fun MovieListScreen(
                     else
                         MovieListItem(
                             configurationDto = viewModel.configure.value,
-                            movie = state[index - index /(Constants.NUMBER_MOVIE_ADD_ADS + 1)],
+                            movie = state[index - index / (Constants.NUMBER_MOVIE_ADD_ADS + 1)],
                             onItemClick = {
                                 navController.navigate(Screen.MovieDetailScreen.route + "/${state[index].id}")
                             })
