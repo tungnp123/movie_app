@@ -92,6 +92,7 @@ class MovieListViewModel @Inject constructor(
                     is Resource.Success -> {
                         appendMovies(result.data?.results ?: emptyList())
                         _isLoading.value = false
+                        _error.value = ""
                         total_pages = result.data?.total_pages ?: 1
                         total_results = result.data?.total_results ?: 0
                         val currentPageSize = result.data?.results?.size ?: 0

@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.ExperimentalComposeApi
-import androidx.navigation.compose.rememberNavController
 import com.myapplication.ui.theme.MyApplicationTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,9 +18,7 @@ class MainActivity : ComponentActivity() {
             MyApplicationTheme {
 
                 Surface(color = MaterialTheme.colors.background) {
-                    NavHostController(
-                        navController = rememberNavController()
-                    )
+                    NavHostController()
                 }
             }
         }
